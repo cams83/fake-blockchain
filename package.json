@@ -1,0 +1,20 @@
+{
+  "name": "fake-blockchain",
+  "version": "1.0.0",
+  "description": "Example of fake blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cams83/fake-blockchain.git"
+  },
+  "keywords": [],
+  "author": "César Magalhães <ceanma83@gmail.com> (https://github.com/cams83)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cams83/fake-blockchain/issues"
+  },
+  "homepage": "https://github.com/cams83/fake-blockchain#readme"
+}
