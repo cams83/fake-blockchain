@@ -39,7 +39,7 @@ export class BlockChain {
       },
       payload
     }
-  }  
+  }
 
   createBlockPayload (data: any) {
     const payload = {
@@ -63,7 +63,7 @@ export class BlockChain {
 
   mineBlock (payload: Block['payload']) {
     let nonce = 0
-    let startTime = +new Date()
+    const startTime = +new Date()
 
     while (true) {
       const blockHash = hash(JSON.stringify(payload))
