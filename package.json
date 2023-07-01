@@ -4,7 +4,8 @@
   "description": "Example of fake blockchain",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -12,9 +13,30 @@
   },
   "keywords": [],
   "author": "César Magalhães <ceanma83@gmail.com> (https://github.com/cams83)",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/cams83/fake-blockchain/issues"
   },
-  "homepage": "https://github.com/cams83/fake-blockchain#readme"
+  "homepage": "https://github.com/cams83/fake-blockchain#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@types/node": "^20.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.43.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
