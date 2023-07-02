@@ -1,17 +1,7 @@
 import { hash, isHashProofed } from './helpers'
+import Block, {BlockPayload, BlockHeader} from './block'
+import MinedData from './mineddata'
 
-export interface Block {
-  header: {
-    nonce: number
-    blockHash: string
-  }
-  payload: {
-    sequence: number
-    timestamp: number
-    data: any
-    previousHash: string
-  }
-}
 
 export class BlockChain {
   _chain: Block[] = []
@@ -21,19 +11,19 @@ export class BlockChain {
     this.chain.push(this.createGenesisBlock())
   }
 
-  get chain () {
+  get chain (): Block[] {
     return this._chain
   }
 
-  private createGenesisBlock () {
-    const payload = {
+  private createGenesisBlock (): Block {
+    const payload = <BlockPayload>{
       sequence: 0,
       timestamp: +new Date(),
       data: 'Genesis Block',
       previousHash: ''
     }
     return {
-      header: {
+      header: <BlockHeader>{
         nonce: 0,
         blockHash: hash(JSON.stringify(payload))
       },
@@ -41,8 +31,8 @@ export class BlockChain {
     }
   }
 
-  createBlockPayload (data: any) {
-    const payload = {
+  createBlockPayload (data: any): BlockPayload  {
+    const payload = <BlockPayload>{
       sequence: this.lastBlock.payload.sequence + 1,
       timestamp: +new Date(),
       data,
@@ -53,7 +43,7 @@ export class BlockChain {
     return payload
   }
 
-  private getPreviousBlockHash () {
+  private getPreviousBlockHash (): string {
     return this.lastBlock.header.blockHash
   }
 
@@ -61,7 +51,7 @@ export class BlockChain {
     return this.chain[this.chain.length - 1]
   }
 
-  mineBlock (payload: Block['payload']) {
+  mineBlock (payload: BlockPayload): MinedData {
     let nonce = 0
     const startTime = +new Date()
 
@@ -91,16 +81,16 @@ export class BlockChain {
     }
   }
 
-  pushBlock (block: Block) {
+  pushBlock (block: Block): Block[] {
     if (this.verifyBlock(block)) this.chain.push(block)
     console.log(`Pushed block #${JSON.stringify(block, null, 2)}`)
     return this.chain
   }
 
-  verifyBlock (block: Block) {
+  verifyBlock (block: Block): boolean {
     if (block.payload.previousHash !== this.getPreviousBlockHash()) {
       console.error(`Invalid block #${block.payload.sequence}: Previous block hash is "${this.getPreviousBlockHash().slice(0, 12)}" not "${block.payload.previousHash.slice(0, 12)}"`)
-      return
+      return false
     }
 
     if (!isHashProofed({
@@ -109,7 +99,7 @@ export class BlockChain {
       prefix: this.powPrefix
     })) {
       console.error(`Invalid block #${block.payload.sequence}: Hash is not proofed, nonce ${block.header.nonce} is not valid`)
-      return
+      return false
     }
 
     return true
