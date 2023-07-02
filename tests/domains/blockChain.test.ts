@@ -1,4 +1,4 @@
-import { BlockChain } from '../src/blockchain'
+import BlockChain from '../../src/domains/blockChain'
 
 describe('BlockChain', () => {
     it('should create a genesis block', () => {

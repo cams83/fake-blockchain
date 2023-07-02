@@ -1,4 +1,4 @@
-import { hash, isHashProofed } from '../src/helpers'
+import { hash, isHashProofed } from '../../src/commons/helpers'
 
 describe('helpers', () => {
     it('should hash data', () => {
